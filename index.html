@@ -2,122 +2,173 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Você é a melhor coisa que aconteceu em minha vida</title>
-    <link rel="icon" href="./assets/Icone coração.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Você é a melhor coisa que aconteceu em minha vida</title>
+  <link rel="icon" href="./assets/Icone coração.png" type="image/png" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .nomes {
+      font-size: 2rem;
+      color: #e91e63;
+    }
+
+    .mensagem,
+    .mensagemTeAmo {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .spotify {
+      width: 150px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .container-botao {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .botao-play,
+    .botao-proxima {
+      font-size: 24px;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffcdd2;
+      color: #880e4f;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .botao-play:hover,
+    .botao-proxima:hover {
+      background-color: #f8bbd0;
+    }
+  </style>
 </head>
 
 <body>
-    <script>
-        const senha = prompt("Digite a senha para acessar:");
-        if (senha !== "Ag2025@") {
-          alert("Senha incorreta. Acesso negado.");
-          document.body.innerHTML = "<h1>Acesso negado.</h1>";
-        }
-      </script>
-    <main>
-        <h1 class="nomes">A gatinha e seu Gatinho ❤️</h1>
+  <script>
+    const senha = prompt("Digite a senha para acessar:");
+    if (senha !== "Ag2025@") {
+      alert("Senha incorreta. Acesso negado.");
+      document.body.innerHTML = "<h1>Acesso negado.</h1>";
+    }
+  </script>
 
-        <h1 class="mensagem">Juntos há: <span id="contador"></span></h1>
+  <main>
+    <h1 class="nomes">A gatinha e seu Gatinho ❤️</h1>
 
-        <h1 class="mensagemTeAmo">"Onde houver amor, há sentido, há abrigo e a promessa de que tudo vale a pena." ❤️</h1>
+    <h1 class="mensagem">
+      Juntos há: <span id="contador"></span>
+    </h1>
 
-        <img src="./assets/Codigo spotify.png" alt="spotify" class="spotify">
+    <h1 class="mensagemTeAmo">
+      "Onde houver amor, há sentido, há abrigo e a promessa de que tudo vale a pena." ❤️
+    </h1>
 
-        <!-- Áudio -->
-        <audio id="musica"></audio>
+    <img src="./assets/Codigo spotify.png" alt="spotify" class="spotify" />
 
-        <!-- Botão de play -->
-        <div class="container-botao">
-            <button class="botao-play" id="playButton">▶️</button>
-        </div>
+    <!-- Áudio -->
+    <audio id="musica"></audio>
 
-        <!-- Opcional: Carrossel de imagens -->
-    </main>
+    <!-- Botões de controle -->
+    <div class="container-botao">
+      <button class="botao-play" id="playButton">▶️</button>
+      <button class="botao-proxima" id="nextButton">⏭️</button>
+    </div>
+  </main>
 
-    <!-- JS embutido -->
-    <script>
-        // Contador de tempo juntos
-        function atualizarContador() {
-            const inicio = new Date("2024-12-16T00:00:00");
-            const agora = new Date();
-            const diff = agora - inicio;
+  <script>
+    // Contador de tempo juntos
+    function atualizarContador() {
+      const inicio = new Date("2024-12-16T00:00:00");
+      const agora = new Date();
+      const diff = agora - inicio;
 
-            const segundosTotais = Math.floor(diff / 1000);
-            const segundos = segundosTotais % 60;
-            const minutos = Math.floor((segundosTotais / 60) % 60);
-            const horas = Math.floor((segundosTotais / 3600) % 24);
-            const diasTotais = Math.floor(segundosTotais / (3600 * 24));
-            const meses = Math.floor(diasTotais / 30.44);
-            const dias = Math.floor(diasTotais % 30.44);
+      const segundosTotais = Math.floor(diff / 1000);
+      const segundos = segundosTotais % 60;
+      const minutos = Math.floor((segundosTotais / 60) % 60);
+      const horas = Math.floor((segundosTotais / 3600) % 24);
+      const diasTotais = Math.floor(segundosTotais / (3600 * 24));
+      const meses = Math.floor(diasTotais / 30.44);
+      const dias = Math.floor(diasTotais % 30.44);
 
-            const contador = document.getElementById("contador");
-            contador.textContent = `${meses} meses, ${dias} dias, ${horas}h ${minutos.toString().padStart(2, '0')}m ${segundos.toString().padStart(2, '0')}s`;
-        }
+      const contador = document.getElementById("contador");
+      contador.textContent = `${meses} meses, ${dias} dias, ${horas}h ${minutos
+        .toString()
+        .padStart(2, "0")}m ${segundos.toString().padStart(2, "0")}s`;
+    }
 
-        setInterval(atualizarContador, 1000);
-        atualizarContador();
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
 
-        // Carrossel de imagens (opcional)
-        const imagens = document.querySelectorAll(".passadorDeImagens img");
-        let index = 0;
+    // Player de música
+    const musicas = [
+      "./assets/chris_stapleton.mp3",
+      "./assets/icaro_e_gilmar.mp3",
+      "./assets/jotaquest_so_hoje.mp3",
+      "./assets/benson_boone.mp3",
+      "./assets/ed_sheeran.mp3",
+      "./assets/all_of_me.mp3"
+    ];
 
-        if (imagens.length > 0) {
-            imagens[index].style.display = 'block';
+    let indiceAtual = 0;
+    const player = document.getElementById("musica");
+    const botaoPlay = document.getElementById("playButton");
+    const botaoNext = document.getElementById("nextButton");
 
-            setInterval(() => {
-                imagens[index].style.display = 'none';
-                index = (index + 1) % imagens.length;
-                imagens[index].style.display = 'block';
-            }, 3000);
-        }
+    // Define a primeira música
+    player.src = musicas[indiceAtual];
 
-        // Playlist de músicas
-        const musicas = [
-            './assets/Chirs Stapleton.mp3',
-            './assets/Ícaro e Gilmar.mp3',
-            './assets/Jota Quest - Só Hoje.mp3',
-            './assets/Benson Boone Beatiful Things.mp3',
-            './assets/Ed.mp3',
-            './assets/All.mp3'
+    function atualizarBotao() {
+      botaoPlay.textContent = player.paused ? "▶️" : "⏸️";
+    }
 
-        ];
+    function tocarMusica() {
+      player.play();
+      atualizarBotao();
+    }
 
-        let indiceAtual = 0;
-        const player = document.getElementById('musica');
-        const botaoPlay = document.getElementById('playButton');
-
-        // Define a primeira música
-        player.src = musicas[indiceAtual];
-
-        function atualizarBotao() {
-            botaoPlay.textContent = player.paused ? '▶️' : '⏸️';
-        }
-
-        function tocarMusica() {
-            player.play();
-            atualizarBotao();
-        }
-
-        botaoPlay.addEventListener('click', () => {
-            if (player.paused) {
-                tocarMusica();
-            } else {
-                player.pause();
-                atualizarBotao();
-            }
-        });
-
-        player.addEventListener('ended', () => {
-            indiceAtual = (indiceAtual + 1) % musicas.length;
-            player.src = musicas[indiceAtual];
-            tocarMusica();
-        });
-
+    botaoPlay.addEventListener("click", () => {
+      if (player.paused) {
+        tocarMusica();
+      } else {
+        player.pause();
         atualizarBotao();
-    </script>
+      }
+    });
+
+    botaoNext.addEventListener("click", () => {
+      indiceAtual = (indiceAtual + 1) % musicas.length;
+      player.src = musicas[indiceAtual];
+      tocarMusica();
+    });
+
+    player.addEventListener("ended", () => {
+      indiceAtual = (indiceAtual + 1) % musicas.length;
+      player.src = musicas[indiceAtual];
+      tocarMusica();
+    });
+
+    atualizarBotao();
+  </script>
 </body>
 
 </html>
