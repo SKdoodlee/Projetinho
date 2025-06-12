@@ -4,39 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leo+Isa</title>
+    <title>Você é a melhor coisa que aconteceu em minha vida</title>
     <link rel="icon" href="./assets/Icone coração.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <script>
+        const senha = prompt("Digite a senha para acessar:");
+        if (senha !== "Ag2025@") {
+          alert("Senha incorreta. Acesso negado.");
+          document.body.innerHTML = "<h1>Acesso negado.</h1>";
+        }
+      </script>
     <main>
-        <h1 class="nomes">Leonardo e Isabelly ❤️</h1>
-
-        <div class="passadorDeImagens">
-            <img src="./assets/1.png" alt="Imagem 1">
-            <img src="./assets/2.png" alt="Imagem 2">
-            <img src="./assets/3.png" alt="Imagem 3">
-            <img src="./assets/4.png" alt="Imagem 4">
-            <img src="./assets/5.png" alt="Imagem 5">
-            <img src="./assets/6.png" alt="Imagem 6">
-            <img src="./assets/7.png" alt="Imagem 7">
-            <img src="./assets/8.png" alt="Imagem 8">
-        </div>
+        <h1 class="nomes">A gatinha e seu Gatinho ❤️</h1>
 
         <h1 class="mensagem">Juntos há: <span id="contador"></span></h1>
 
-        <h1 class="mensagemTeAmo">Te amo, meu dengo ❤️</h1>
+        <h1 class="mensagemTeAmo">"Onde houver amor, há sentido, há abrigo e a promessa de que tudo vale a pena." ❤️</h1>
 
         <img src="./assets/Codigo spotify.png" alt="spotify" class="spotify">
-        <audio id="musica" src="./assets/Musica Heaven - Bryan Adams.mp3"></audio>
 
+        <!-- Áudio -->
+        <audio id="musica"></audio>
+
+        <!-- Botão de play -->
         <div class="container-botao">
-            <button class="botao-play" id="playButton"></button>
+            <button class="botao-play" id="playButton">▶️</button>
         </div>
+
+        <!-- Opcional: Carrossel de imagens -->
     </main>
 
-    <script src="js.js"></script>
+    <!-- JS embutido -->
+    <script>
+        // Contador de tempo juntos
+        function atualizarContador() {
+            const inicio = new Date("2024-12-16T00:00:00");
+            const agora = new Date();
+            const diff = agora - inicio;
+
+            const segundosTotais = Math.floor(diff / 1000);
+            const segundos = segundosTotais % 60;
+            const minutos = Math.floor((segundosTotais / 60) % 60);
+            const horas = Math.floor((segundosTotais / 3600) % 24);
+            const diasTotais = Math.floor(segundosTotais / (3600 * 24));
+            const meses = Math.floor(diasTotais / 30.44);
+            const dias = Math.floor(diasTotais % 30.44);
+
+            const contador = document.getElementById("contador");
+            contador.textContent = `${meses} meses, ${dias} dias, ${horas}h ${minutos.toString().padStart(2, '0')}m ${segundos.toString().padStart(2, '0')}s`;
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+
+        // Carrossel de imagens (opcional)
+        const imagens = document.querySelectorAll(".passadorDeImagens img");
+        let index = 0;
+
+        if (imagens.length > 0) {
+            imagens[index].style.display = 'block';
+
+            setInterval(() => {
+                imagens[index].style.display = 'none';
+                index = (index + 1) % imagens.length;
+                imagens[index].style.display = 'block';
+            }, 3000);
+        }
+
+        // Playlist de músicas
+        const musicas = [
+            './assets/Chirs Stapleton.mp3',
+            './assets/Ícaro e Gilmar.mp3',
+            './assets/Jota Quest - Só Hoje.mp3',
+            './assets/Benson Boone Beatiful Things.mp3',
+            './assets/Ed.mp3',
+            './assets/All.mp3'
+
+        ];
+
+        let indiceAtual = 0;
+        const player = document.getElementById('musica');
+        const botaoPlay = document.getElementById('playButton');
+
+        // Define a primeira música
+        player.src = musicas[indiceAtual];
+
+        function atualizarBotao() {
+            botaoPlay.textContent = player.paused ? '▶️' : '⏸️';
+        }
+
+        function tocarMusica() {
+            player.play();
+            atualizarBotao();
+        }
+
+        botaoPlay.addEventListener('click', () => {
+            if (player.paused) {
+                tocarMusica();
+            } else {
+                player.pause();
+                atualizarBotao();
+            }
+        });
+
+        player.addEventListener('ended', () => {
+            indiceAtual = (indiceAtual + 1) % musicas.length;
+            player.src = musicas[indiceAtual];
+            tocarMusica();
+        });
+
+        atualizarBotao();
+    </script>
 </body>
 
 </html>
